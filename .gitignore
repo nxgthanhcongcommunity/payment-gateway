@@ -1,0 +1,60 @@
+# Build results
+bin
+obj
+out
+
+# User-specific files
+.user
+.suo
+.userosscache
+.sln.docstates
+
+# VS Code
+.vscode
+
+# Visual Studio
+.vs
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Logs
+.log
+
+# NuGet
+.nupkg
+.snupkg
+.nuget
+packages
+.nuspec
+
+# Transient files
+.tmp
+.bak
+
+# Rider IDE
+.idea
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+.swp
+~
+
+# Coverage
+coverage
+TestResults
+
+# Others
+.env
