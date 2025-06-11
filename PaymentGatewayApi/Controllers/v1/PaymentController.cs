@@ -17,8 +17,8 @@ namespace PaymentGatewayApi.Controllers.v1
             _paymentBusiness = paymentBusiness;
         }
 
-        [HttpGet(Name = "get-payment-url")]
-        public async Task<object> Get([FromQuery]GetPaymentUrlRequest Req)
+        [HttpPost(Name = "init-payment-url")]
+        public async Task<object> Get([FromBody]GetPaymentUrlRequest Req)
         {
             return await _paymentBusiness.GetPaymentUrlAsync(Req);
         }

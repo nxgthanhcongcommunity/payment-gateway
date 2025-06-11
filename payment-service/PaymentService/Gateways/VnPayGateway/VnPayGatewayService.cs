@@ -1,6 +1,8 @@
-﻿using Core.Models.ResponseModels;
+﻿using Core.Models.GlobalModels;
+using Core.Models.ResponseModels;
 using Microsoft.Extensions.Options;
 using PaymentService.Models.RequestModels;
+using System.Text.Json;
 
 namespace PaymentService.Gateways.VnPayGateway
 {
@@ -9,14 +11,18 @@ namespace PaymentService.Gateways.VnPayGateway
 
         private readonly VnPayGatewayOptions _options;
 
+        private readonly RequestContextData _requestContextData;
 
-        public VnPayGatewayService(IOptions<VnPayGatewayOptions> options)
+        public VnPayGatewayService(IOptions<VnPayGatewayOptions> options, RequestContextData requestContextData)
         {
             _options = options.Value;
+            _requestContextData = requestContextData;
         }
 
         public async Task<string> GetPaymentUrlAsync(GetPaymentUrlRequest Req)
         {
+            Console.WriteLine(JsonSerializer.Serialize(_requestContextData));
+
             //Get Config Info
             string vnp_Returnurl = _options.ReturnUrl; //URL nhan ket qua tra ve 
             string vnp_Url = _options.PaymentUrl; //URL thanh toan cua VNPAY 

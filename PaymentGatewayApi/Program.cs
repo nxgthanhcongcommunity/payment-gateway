@@ -1,5 +1,7 @@
 
+using Core.Models.GlobalModels;
 using PaymentService;
+using Core.Middlewares.Middlewares;
 
 namespace PaymentGatewayApi
 {
@@ -18,8 +20,12 @@ namespace PaymentGatewayApi
 
             // Inject internal service
             builder.Services.AddPaymentServices(builder.Configuration);
+            builder.Services.AddScoped<RequestContextData>();
 
             var app = builder.Build();
+
+            // Inject middlewares
+            app.UseRequestContext();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
