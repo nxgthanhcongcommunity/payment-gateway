@@ -1,11 +1,12 @@
 ﻿using Core.Models.ResponseModels;
 using PaymentService.Core;
+using PaymentService.Models.RequestModels;
 
 namespace PaymentService.Gateways.ZaloPayGateway
 {
     public class ZaloPayGatewayService : IZaloPayGatewayService
     {
-        public async Task<string> GetPaymentUrlAsync()
+        public async Task<string> GetPaymentUrlAsync(GetPaymentUrlRequest Req)
         {
             return "okasd zalo";
         }

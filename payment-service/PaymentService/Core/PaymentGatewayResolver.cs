@@ -16,7 +16,7 @@ namespace PaymentService.Core
 
         public IPaymentGatewayService GetGateway(string type) => type switch
         {
-            PaymentGatewayTypeEnum.VNPay => _provider.GetRequiredService<IVnPayGatewayService>(),
+            PaymentGatewayTypeEnum.VnPay => _provider.GetRequiredService<IVnPayGatewayService>(),
             PaymentGatewayTypeEnum.ZaloPay => _provider.GetRequiredService<IZaloPayGatewayService>(),
             _ => throw new NotSupportedException("Gateway not supported")
         };

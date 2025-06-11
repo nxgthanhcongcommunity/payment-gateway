@@ -2,7 +2,7 @@
 {
     public static class PaymentGatewayTypeEnum
     {
-        public const string VNPay = "VNPay";
+        public const string VnPay = "VnPay";
         public const string ZaloPay = "ZaloPay";
     }
 }

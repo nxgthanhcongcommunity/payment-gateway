@@ -11,7 +11,7 @@ namespace PaymentService
     {
         public static IServiceCollection AddPaymentServices(this IServiceCollection services, IConfigurationManager configuration)
         {
-
+            services.Configure<VnPayGatewayOptions>(configuration.GetSection("Gateways:VNPay"));
             services.AddScoped<IVnPayGatewayService, VnPayGatewayService>();
             services.AddScoped<IZaloPayGatewayService, ZaloPayGatewayService>();
 

@@ -18,7 +18,7 @@ namespace PaymentService.Business
         {
             var gw = _paymentGatewayResolver.GetGateway(Req.Provider);
 
-            var rs = await gw.GetPaymentUrlAsync();
+            var rs = await gw.GetPaymentUrlAsync(Req);
 
             return new BaseResonseModel<object>
             {
