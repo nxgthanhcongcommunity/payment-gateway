@@ -7,6 +7,6 @@ namespace PaymentService.Business
     {
         Task<BaseResonseModel<object>> GetPaymentUrlAsync(GetPaymentUrlRequest Req);
         Task<BaseResonseModel<object>> ProcessReturnUrlAsync();
-        Task<BaseResonseModel<object>> ProcessIPNAsync();
+        Task<BaseResonseModel<object>> ProcessIPNAsync(IPNRequest Req);
     }
 }

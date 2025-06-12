@@ -1,4 +1,4 @@
-
+﻿
 using Core.Models.GlobalModels;
 using PaymentService;
 using Core.Middlewares;
@@ -13,7 +13,11 @@ namespace PaymentGatewayApi
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null; // giữ nguyên tên property PascalCase
+                }); ;
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

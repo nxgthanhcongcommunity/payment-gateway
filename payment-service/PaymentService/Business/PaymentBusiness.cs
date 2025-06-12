@@ -20,15 +20,16 @@ namespace PaymentService.Business
 
             var rs = await gw.GetPaymentUrlAsync(Req);
 
-            return new BaseResonseModel<object>
-            {
-                Data = rs,
-            };
+            return BaseResonseModel<object>.Success(rs);
         }
 
-        public Task<BaseResonseModel<object>> ProcessIPNAsync()
+        public async Task<BaseResonseModel<object>> ProcessIPNAsync(IPNRequest Req)
         {
-            throw new NotImplementedException();
+            var gw = _paymentGatewayResolver.GetGateway(Req.Provider);
+
+            var rs = await gw.ProcessIPNAsync(Req);
+
+            return BaseResonseModel<object>.Success(rs);
         }
 
         public Task<BaseResonseModel<object>> ProcessReturnUrlAsync()

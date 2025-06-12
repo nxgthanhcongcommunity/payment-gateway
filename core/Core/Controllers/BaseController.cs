@@ -38,6 +38,8 @@ namespace Core.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
+
                 HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 return new BaseResonse<T>
                 {

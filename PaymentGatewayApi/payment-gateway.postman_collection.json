@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "d1ad7d22-97ce-4275-998b-9dec940f58fb",
+		"name": "payment-gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20346311"
+	},
+	"item": [
+		{
+			"name": "init-payment-url",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"provider\": \"VnPay\",\n  \"orderInfo\": {},\n  \"vnPayRequest\": {\n    \"amount\": 12000,\n    \"bankCode\": \"VNBANK\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7220/v1/payment-gateway/init-payment-url",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7220",
+					"path": [
+						"v1",
+						"payment-gateway",
+						"init-payment-url"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

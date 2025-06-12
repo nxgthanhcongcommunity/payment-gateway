@@ -1,7 +1,10 @@
 ﻿using Core.Models.GlobalModels;
 using Core.Models.ResponseModels;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using PaymentService.Models.RequestModels;
+using PaymentService.Models.ResponseModels;
+using PaymentService.Models.ResponseModels.VnPayGateway;
 using System.Text.Json;
 
 namespace PaymentService.Gateways.VnPayGateway
@@ -62,9 +65,54 @@ namespace PaymentService.Gateways.VnPayGateway
             return paymentUrl;
         }
 
-        public Task<BaseResonseModel<object>> ProcessIPNAsync()
+        public async Task<IPNResponse> ProcessIPNAsync(IPNRequest Req)
         {
-            throw new NotImplementedException();
+            string vnp_HashSecret = _options.HashSecret; //Secret key
+            VnPayGatewayLibrary vnpay = new VnPayGatewayLibrary();
+
+
+            foreach (var prop in Req.VnPayRequest.GetType().GetProperties())
+            {
+                var name = prop.Name;
+                var value = prop.GetValue(Req.VnPayRequest);
+
+                vnpay.AddResponseData($"vnp_{name}", "" + value);
+            }
+
+            //Lay danh sach tham so tra ve tu VNPAY
+            //vnp_TxnRef: Ma don hang merchant gui VNPAY tai command=pay    
+            //vnp_TransactionNo: Ma GD tai he thong VNPAY
+            //vnp_ResponseCode:Response code from VNPAY: 00: Thanh cong, Khac 00: Xem tai lieu
+            //vnp_SecureHash: HmacSHA512 cua du lieu tra ve
+
+            long orderId = Convert.ToInt64(vnpay.GetResponseData("vnp_TxnRef"));
+            long vnp_Amount = Convert.ToInt64(vnpay.GetResponseData("vnp_Amount")) / 100;
+            long vnpayTranId = Convert.ToInt64(vnpay.GetResponseData("vnp_TransactionNo"));
+            string vnp_ResponseCode = vnpay.GetResponseData("vnp_ResponseCode");
+            string vnp_TransactionStatus = vnpay.GetResponseData("vnp_TransactionStatus");
+            String vnp_SecureHash = Req.VnPayRequest.SecureHash;
+            
+            bool checkSignature = vnpay.ValidateSignature(vnp_SecureHash, vnp_HashSecret);
+            if (checkSignature == false) 
+            {
+                return new IPNResponse
+                {
+                    VnPayResponse = new VnPayIPNResponse
+                    {
+                        RspCode = "97",
+                        Message = "Invalid signature"
+                    }
+                };
+            }
+
+            return new IPNResponse
+            {
+                VnPayResponse = new VnPayIPNResponse
+                {
+                    RspCode = "00",
+                    Message = "asd",
+                }
+            };
         }
 
         public Task<BaseResonseModel<object>> ProcessReturnUrlAsync()

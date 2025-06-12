@@ -1,6 +1,7 @@
 ﻿using Core.Models.ResponseModels;
 using PaymentService.Core;
 using PaymentService.Models.RequestModels;
+using PaymentService.Models.ResponseModels;
 
 namespace PaymentService.Gateways.ZaloPayGateway
 {
@@ -11,7 +12,7 @@ namespace PaymentService.Gateways.ZaloPayGateway
             return "okasd zalo";
         }
 
-        public Task<BaseResonseModel<object>> ProcessIPNAsync()
+        public Task<IPNResponse> ProcessIPNAsync(IPNRequest Req)
         {
             throw new NotImplementedException();
         }

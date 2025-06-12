@@ -7,5 +7,13 @@
         public T Data { get; set; }
         public object ErrorInfo { get; set; }
 
+        public static BaseResonseModel<T> Success(T data) 
+        { 
+            return new BaseResonseModel<T> 
+            { 
+                Succeed = true,
+                Data = data,
+            };
+        }
     }
 }
