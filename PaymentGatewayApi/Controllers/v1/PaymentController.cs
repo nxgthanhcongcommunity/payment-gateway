@@ -1,4 +1,5 @@
 using Core.Controllers;
+using Core.Models.GlobalModels;
 using Microsoft.AspNetCore.Mvc;
 using PaymentService.Business;
 using PaymentService.Models.RequestModels;
@@ -13,7 +14,10 @@ namespace PaymentGatewayApi.Controllers.v1
 
         private readonly IPaymentBusiness _paymentBusiness;
 
-        public PaymentController(IPaymentBusiness paymentBusiness)
+        public PaymentController(
+            RequestContextData requestContextData,
+            IPaymentBusiness paymentBusiness
+            ) : base( requestContextData )
         {
             _paymentBusiness = paymentBusiness;
         }

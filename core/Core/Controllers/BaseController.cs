@@ -13,6 +13,13 @@ namespace Core.Controllers
     public class BaseController : ControllerBase
     {
 
+        private readonly RequestContextData _requestContextData;
+
+        public BaseController(RequestContextData requestContextData)
+        {
+            _requestContextData = requestContextData;
+        }
+
         protected async Task<BaseResonse<T>> HandleRequestAsync<T>(Task<BaseResonseModel<T>> action)
         {
             try
@@ -25,7 +32,7 @@ namespace Core.Controllers
                     Succeed = response.Succeed,
                     Message = response.Message,
                     Data = response.Data,
-                    TraceId = "213",
+                    TraceId = _requestContextData.TraceId,
                     ErrorInfo = response.ErrorInfo,
                 };
             }
@@ -36,7 +43,7 @@ namespace Core.Controllers
                 {
                     Succeed = false,
                     Message = "Server error!!",
-                    TraceId = "213",
+                    TraceId = _requestContextData.TraceId,
                 };
             }
         }

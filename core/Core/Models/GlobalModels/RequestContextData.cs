@@ -14,7 +14,24 @@
                 }
             }
         }
-        public DateTime CurrentUTCDateTime { get; set; }
+        public DateTime CurrentUTCDateTime
+        {
+            get
+            {
+                return DateTime.UtcNow;
+            }
+        }
+
+        public string TraceId 
+        { 
+            get 
+            {
+                string guid = Guid.NewGuid().ToString();
+                string currentTime = CurrentDateTime.ToString("yyyy-MM-dd-HH:mm:ss.fff");
+                return $"[{currentTime}]-{guid}";
+            } 
+        }
+
     }
 
     public static class TZEnum

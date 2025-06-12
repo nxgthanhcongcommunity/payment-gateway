@@ -14,7 +14,7 @@ namespace Core.Middlewares
 
         public async Task InvokeAsync(HttpContext context, RequestContextData requestContext)
         {
-            requestContext.CurrentUTCDateTime = DateTime.UtcNow; // hoặc theo logic riêng
+            //requestContext.CurrentUTCDateTime = DateTime.UtcNow; // hoặc theo logic riêng
             await _next(context);
         }
     }
