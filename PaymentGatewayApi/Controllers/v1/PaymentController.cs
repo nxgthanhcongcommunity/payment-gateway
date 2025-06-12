@@ -1,3 +1,4 @@
+using Core.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using PaymentService.Business;
 using PaymentService.Models.RequestModels;
@@ -7,7 +8,7 @@ namespace PaymentGatewayApi.Controllers.v1
 {
     [ApiController]
     [Route("v1/[controller]")]
-    public class PaymentController : ControllerBase
+    public class PaymentController : BaseController
     {
 
         private readonly IPaymentBusiness _paymentBusiness;
@@ -20,7 +21,7 @@ namespace PaymentGatewayApi.Controllers.v1
         [HttpPost(Name = "init-payment-url")]
         public async Task<object> Get([FromBody]GetPaymentUrlRequest Req)
         {
-            return await _paymentBusiness.GetPaymentUrlAsync(Req);
+            return await HandleRequestAsync(_paymentBusiness.GetPaymentUrlAsync(Req));
         }
     }
 }

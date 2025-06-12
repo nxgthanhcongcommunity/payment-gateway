@@ -14,11 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\core\Core.Models\Core.Models.csproj" />
+    <Folder Include="Models\ResponseModels\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\ResponseModels\" />
+    <ProjectReference Include="..\..\core\Core\Core.csproj" />
   </ItemGroup>
 
 </Project>

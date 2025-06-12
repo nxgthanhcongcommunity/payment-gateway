@@ -1,7 +1,7 @@
 
 using Core.Models.GlobalModels;
 using PaymentService;
-using Core.Middlewares.Middlewares;
+using Core.Middlewares;
 
 namespace PaymentGatewayApi
 {
