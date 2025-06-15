@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PaymentService.Gateways.SePayGateway;
 using PaymentService.Gateways.VnPayGateway;
 using PaymentService.Gateways.ZaloPayGateway;
 using PaymentService.Models.EnumModels;
@@ -18,6 +19,7 @@ namespace PaymentService.Core
         {
             PaymentGatewayTypeEnum.VnPay => _provider.GetRequiredService<IVnPayGatewayService>(),
             PaymentGatewayTypeEnum.ZaloPay => _provider.GetRequiredService<IZaloPayGatewayService>(),
+            PaymentGatewayTypeEnum.SePay => _provider.GetRequiredService<ISePayGatewayService>(),
             _ => throw new NotSupportedException("Gateway not supported")
         };
     }

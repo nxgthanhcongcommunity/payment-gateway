@@ -4,5 +4,6 @@
     {
         public const string VnPay = "VnPay";
         public const string ZaloPay = "ZaloPay";
+        public const string SePay = "SePay";
     }
 }

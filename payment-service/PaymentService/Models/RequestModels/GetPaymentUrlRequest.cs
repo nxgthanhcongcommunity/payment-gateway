@@ -12,7 +12,8 @@ namespace PaymentService.Models.RequestModels
 
     public class GetPaymentUrlOrderInfoRequest
     {
-
+        public string AccountCode { get; set; }
+        public decimal Amount { get; set; }
     }
 
 }
