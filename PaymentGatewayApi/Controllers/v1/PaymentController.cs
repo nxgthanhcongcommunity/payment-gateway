@@ -5,6 +5,7 @@ using Core.Models.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 using PaymentService.Business;
 using PaymentService.Models.RequestModels;
+using PaymentService.Models.RequestModels.SePayGateway;
 using PaymentService.Models.RequestModels.VnPayGateway;
 using PaymentService.Models.ResponseModels;
 using System.Text.Json;
@@ -47,6 +48,23 @@ namespace PaymentGatewayApi.Controllers.v1
             var rs1 = rs.Data as IPNResponse;
 
             return rs1?.VnPayResponse;
+        }
+
+        [HttpGet("sepay-process-ipn")]
+        public async Task<object> SepayProcessIPN([FromBody] SePayIPNRequest Req)
+        {
+            var IPNRequest = new IPNRequest
+            {
+                Provider = "SePay",
+                SePayRequest = Req,
+            };
+            //return await HandleRequestAsync(_paymentBusiness.ProcessIPNAsync(IPNRequest));
+
+            var rs = await _paymentBusiness.ProcessIPNAsync(IPNRequest);
+
+            var rs1 = rs.Data as IPNResponse;
+
+            return rs1?.SePayResponse;
         }
 
     }

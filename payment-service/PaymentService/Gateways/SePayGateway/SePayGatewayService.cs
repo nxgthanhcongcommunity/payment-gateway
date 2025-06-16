@@ -23,13 +23,21 @@ namespace PaymentService.Gateways.SePayGateway
 
         public async Task<string> GetPaymentUrlAsync(GetPaymentUrlRequest Req)
         {
-            string data = Req.OrderInfo.AccountCode; // xác định transaction này là cho user nào để +- tiền
+            long orderId = 123444;
+            string data = "123444_" + Req.OrderInfo.AccountCode; // xác định transaction này là cho user nào để +- tiền
 
             string encrypted = Helper.EncryptAes(data, _options.PriKey);
 
             //string decrypted = Helper.DecryptAes(encrypted, _options.PriKey);
 
-            return $"https://qr.sepay.vn/img?acc={_options.Stk}&bank={_options.Bank}&amount={Req.OrderInfo.Amount}&des={encrypted}&template={_options.Template}&download={_options.Download}";
+            return $"https://qr.sepay.vn/img?" +
+               $"acc={_options.Stk}&" +
+               $"bank={_options.Bank}&" +
+               $"amount={Req.OrderInfo.Amount}&" +
+               $"des={encrypted}&" +
+               $"template={_options.Template}&" +
+               $"download={_options.Download}";
+
         }
 
         public async Task<IPNResponse> ProcessIPNAsync(IPNRequest Req)

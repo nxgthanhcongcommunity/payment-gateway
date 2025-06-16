@@ -1,4 +1,5 @@
-﻿using PaymentService.Models.RequestModels.VnPayGateway;
+﻿using PaymentService.Models.RequestModels.SePayGateway;
+using PaymentService.Models.RequestModels.VnPayGateway;
 
 namespace PaymentService.Models.RequestModels
 {
@@ -6,5 +7,6 @@ namespace PaymentService.Models.RequestModels
     {
         public string Provider { get; set; }
         public VnPayIPNRequest VnPayRequest { get; set; }
+        public SePayIPNRequest SePayRequest { get; set; }
     }
 }
